@@ -8,6 +8,7 @@ const filterActiveBtn = document.getElementById("filter-active")
 const filterCompletedBtn = document.getElementById("filter-completed")
 const taskSearch = document.getElementById("task-search")
 const clearSearchBtn = document.getElementById("clear-search-btn")
+const taskDueDate = document.getElementById("task-due-date")
 
 taskSearch.addEventListener("input", () => {
     console.log(taskSearch.value)
@@ -60,11 +61,19 @@ function createTaskElement(task) {
     const deleteBtn = document.createElement("button")
     const editButton = document.createElement("button")
     const taskTextSpan = document.createElement("span")
+    const dueDateSpan = document.createElement("span")
+    dueDateSpan.classList.add("due-date")
 
     deleteBtn.textContent = "Delete"
     deleteBtn.classList.add("delete-btn")
     taskTextSpan.textContent = task.text
+
+    if (task.dueDate) {
+        dueDateSpan.textContent = `Due: ${task.dueDate}`
+    }
+
     newTask.appendChild(taskTextSpan)
+    newTask.appendChild(dueDateSpan)
     editButton.textContent = "Edit"
     editButton.classList.add("edit-btn")
     newTask.appendChild(editButton)
@@ -119,6 +128,7 @@ tasks.forEach((task) => {
 
 addTaskBtn.addEventListener("click", () => {
     const taskText = taskInput.value.trim()
+    const dueDate = taskDueDate.value
 
     if (taskText === "") {
         return
@@ -126,7 +136,8 @@ addTaskBtn.addEventListener("click", () => {
 
     const task = {
         text: taskText,
-        completed: false
+        completed: false,
+        dueDate: dueDate
     }
     tasks.push(task)
     localStorage.setItem("tasks", JSON.stringify(tasks))
@@ -135,6 +146,7 @@ addTaskBtn.addEventListener("click", () => {
     
     renderTasks()
     taskInput.value = ""
+    taskDueDate.value = ""
 })
 
 taskInput.addEventListener("keydown", (event) => {
