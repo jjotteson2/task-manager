@@ -70,3 +70,14 @@ body {
     color: #666;
     margin-top: 5px;
 }
+
+.dark-mode {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.dark-mode #task-list li {
+    background-color: #333333;
+    color: white;
+    border-color: #555555;
+}

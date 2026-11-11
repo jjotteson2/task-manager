@@ -9,6 +9,7 @@ const filterCompletedBtn = document.getElementById("filter-completed")
 const taskSearch = document.getElementById("task-search")
 const clearSearchBtn = document.getElementById("clear-search-btn")
 const taskDueDate = document.getElementById("task-due-date")
+const darkModeBtn = document.getElementById("dark-mode-btn")
 
 taskSearch.addEventListener("input", () => {
     console.log(taskSearch.value)
@@ -221,3 +222,19 @@ function renderTasks() {
     }
 }
 renderTasks()
+
+darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode")
+    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"))
+
+    if (document.body.classList.contains("dark-mode")) {
+        darkModeBtn.textContent = "Light Mode"
+    } else {
+        darkModeBtn.textContent = "Dark Mode"
+    }
+})
+
+if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode")
+    darkModeBtn.textContent = "Light Mode"
+}
