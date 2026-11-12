@@ -10,6 +10,7 @@ const taskSearch = document.getElementById("task-search")
 const clearSearchBtn = document.getElementById("clear-search-btn")
 const taskDueDate = document.getElementById("task-due-date")
 const darkModeBtn = document.getElementById("dark-mode-btn")
+const taskPriority = document.getElementById("task-priority")
 
 taskSearch.addEventListener("input", () => {
     console.log(taskSearch.value)
@@ -63,17 +64,22 @@ function createTaskElement(task) {
     const editButton = document.createElement("button")
     const taskTextSpan = document.createElement("span")
     const dueDateSpan = document.createElement("span")
+    const prioritySpan = document.createElement("span")
     dueDateSpan.classList.add("due-date")
+    prioritySpan.classList.add("task-priority")
+    prioritySpan.classList.add("priority-" + (task.priority || "medium"))
 
     deleteBtn.textContent = "Delete"
     deleteBtn.classList.add("delete-btn")
     taskTextSpan.textContent = task.text
+    prioritySpan.textContent = task.priority || "medium"
 
     if (task.dueDate) {
         dueDateSpan.textContent = `Due: ${task.dueDate}`
     }
 
     newTask.appendChild(taskTextSpan)
+    newTask.append(prioritySpan)
     newTask.appendChild(dueDateSpan)
     editButton.textContent = "Edit"
     editButton.classList.add("edit-btn")
@@ -130,6 +136,8 @@ tasks.forEach((task) => {
 addTaskBtn.addEventListener("click", () => {
     const taskText = taskInput.value.trim()
     const dueDate = taskDueDate.value
+    const priority = taskPriority.value
+    console.log(priority)
 
     if (taskText === "") {
         return
@@ -138,7 +146,8 @@ addTaskBtn.addEventListener("click", () => {
     const task = {
         text: taskText,
         completed: false,
-        dueDate: dueDate
+        dueDate: dueDate,
+        priority: priority
     }
     tasks.push(task)
     localStorage.setItem("tasks", JSON.stringify(tasks))

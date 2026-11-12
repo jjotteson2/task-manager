@@ -81,3 +81,25 @@ body {
     color: white;
     border-color: #555555;
 }
+
+.task-priority {
+    margin-left: 10px;
+}
+
+.priority-low {
+    background-color: lightgreen;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.priority-medium {
+    background-color: orange;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.priority-high {
+    background-color: red;
+    padding: 5px;
+    border-radius: 10px;
+}
